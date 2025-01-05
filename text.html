@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐按键</title>
+    <style>
+     .keyboard {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            height: 100vh;
+            align-items: center;
+        }
+
+     .row {
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+            margin-bottom: 10px;
+        }
+
+     .key {
+            padding: 20px 30px;
+            border: 1px solid #000;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 50%;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="keyboard">
+        <div class="row">
+            <div class="key" data-note="1-up">1</div>
+            <div class="key" data-note="2-up">2</div>
+            <div class="key" data-note="3-up">3</div>
+            <div class="key" data-note="4-up">4</div>
+            <div class="key" data-note="5-up">5</div>
+            <div class="key" data-note="6-up">6</div>
+            <div class="key" data-note="7-up">7</div>
+        </div>
+        <div class="row">
+            <div class="key" data-note="1-middle">1</div>
+            <div class="key" data-note="2-middle">2</div>
+            <div class="key" data-note="3-middle">3</div>
+            <div class="key" data-note="4-middle">4</div>
+            <div class="key" data-note="5-middle">5</div>
+            <div class="key" data-note="6-middle">6</div>
+            <div class="key" data-note="7-middle">7</div>
+        </div>
+        <div class="row">
+            <div class="key" data-note="1-down">1</div>
+            <div class="key" data-note="2-down">2</div>
+            <div class="key" data-note="3-down">3</div>
+            <div class="key" data-note="4-down">4</div>
+            <div class="key" data-note="5-down">5</div>
+            <div class="key" data-note="6-down">6</div>
+            <div class="key" data-note="7-down">7</div>
+        </div>
+    </div>
+    <script>
+        const keys = document.querySelectorAll('.key');
+        keys.forEach(key => {
+            key.addEventListener('click', function () {
+                const note = this.dataset.note;
+                const audio = new Audio();
+                let audioPath;
+                if (note.includes('up')) {
+                    audioPath = 'up_' + note[0] + '.mp3';
+                } else if (note.includes('middle')) {
+                    audioPath ='middle_' + note[0] + '.mp3';
+                } else {
+                    audioPath = 'down_' + note[0] + '.mp3';
+                }
+                audio.src = audioPath;
+                audio.play();
+            });
+        });
+    </script>
+</body>
+
+</html>
