@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>音乐按键</title>
     <style>
-     .keyboard {
+      .keyboard {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -14,14 +14,14 @@
             align-items: center;
         }
 
-     .row {
+      .row {
             display: flex;
             justify-content: space-around;
             width: 80%;
             margin-bottom: 10px;
         }
 
-     .key {
+      .key {
             padding: 20px 30px;
             border: 1px solid #000;
             cursor: pointer;
@@ -48,10 +48,10 @@
             <div class="key" data-note="2-middle">2</div>
             <div class="key" data-note="3-middle">3</div>
             <div class="key" data-note="4-middle">4</div>
-            <div class="key" data-note="5-middle">5</div>
+            <div class="key" de="5-middle">5</div>
             <div class="key" data-note="6-middle">6</div>
             <div class="key" data-note="7-middle">7</div>
-        </div>
+        </2>
         <div class="row">
             <div class="key" data-note="1-down">1</div>
             <div class="key" data-note="2-down">2</div>
@@ -70,11 +70,11 @@
                 const audio = new Audio();
                 let audioPath;
                 if (note.includes('up')) {
-                    audioPath = 'up_' + note[0] + '.mp3';
+                    audioPath ='sound/up_' + note[0] + '.m4a';
                 } else if (note.includes('middle')) {
-                    audioPath ='middle_' + note[0] + '.mp3';
+                    audioPath ='sound/middle_' + note[0] + '.m4a';
                 } else {
-                    audioPath = 'down_' + note[0] + '.mp3';
+                    audioPath ='sound/down_' + note[0] + '.m4a';
                 }
                 audio.src = audioPath;
                 audio.play();
