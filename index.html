@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>音乐按键</title>
     <style>
-      .keyboard {
+     .keyboard {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -14,14 +14,14 @@
             align-items: center;
         }
 
-      .row {
+     .row {
             display: flex;
             justify-content: space-around;
             width: 80%;
             margin-bottom: 10px;
         }
 
-      .key {
+     .key {
             padding: 20px 30px;
             border: 1px solid #000;
             cursor: pointer;
@@ -48,10 +48,10 @@
             <div class="key" data-note="2-middle">2</div>
             <div class="key" data-note="3-middle">3</div>
             <div class="key" data-note="4-middle">4</div>
-            <div class="key" de="5-middle">5</div>
+            <div class="key" data-note="5-middle">5</div>
             <div class="key" data-note="6-middle">6</div>
             <div class="key" data-note="7-middle">7</div>
-        </2>
+        </div>
         <div class="row">
             <div class="key" data-note="1-down">1</div>
             <div class="key" data-note="2-down">2</div>
@@ -63,11 +63,13 @@
         </div>
     </div>
     <script>
-        const keys = document.querySelectorAll('.key');
-        keys.forEach(key => {
-            key.addEventListener('click', function () {
-                const note = this.dataset.note;
-                const audio = new Audio();
+        const audios = {};
+        window.onload = function () {
+            const notes = ['1-up', '2-up', '3-up', '4-up', '5-up', '6-up', '7-up',
+                '1-middle', '2-middle', '3-middle', '4-middle', '5-middle', '6-middle', '7-middle',
+                '1-down', '2-down', '3-down', '4-down', '5-down', '6-down', '7-down'
+            ];
+            notes.forEach((note) => {
                 let audioPath;
                 if (note.includes('up')) {
                     audioPath ='sound/up_' + note[0] + '.m4a';
@@ -76,8 +78,19 @@
                 } else {
                     audioPath ='sound/down_' + note[0] + '.m4a';
                 }
-                audio.src = audioPath;
-                audio.play();
+                audios[note] = new Audio(audioPath);
+                audios[note].pause();
+            });
+        }
+        const keys = document.querySelectorAll('.key');
+        keys.forEach(key => {
+            key.addEventListener('click', function () {
+                const note = this.dataset.note;
+                audios[note].currentTime = 0;
+                audios[note].play();
+                audios[note].addEventListener('ended', function () {
+                    delete audios[note];
+                });
             });
         });
     </script>
